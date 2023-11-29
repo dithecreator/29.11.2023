@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+
+// Задание 4
+// Создать массив аудиторий академии. Объект-аудитория со-
+// стоит из названия, количества посадочных мест (от 10 до 20) и
+// названия факультета, для которого она предназначена.
+// Написать несколько функций для работы с ним.
+// 1. Вывод на экран всех аудиторий.
+// 2.Вывод на экран аудиторий для указанного факультета.
+// 3.Вывод на экран только тех аудиторий, которые подходят для
+// переданной группы. Объект-группа состоит из названия,
+// количества студентов и названия факультета.
+// 4.Функция сортировки аудитории по количеству мест
+// 5.Функция сортировки аудиторий по названию(по алфавиту)
+        let audience = [["математика", 10, "факультет математики"], ["психология", 15, "факультет филологии"]];
+        let answer;
+        function show(){// 1. Вывод на экран всех аудиторий.
+            document.write("все аудитории:".bold() + "<br>");
+            document.write(audience.join("<br>"));
+            document.write("<br>");
+            document.write("<br>");
+        }
+
+        function show_choice(){// 2.Вывод на экран аудиторий для указанного факультета.
+            answer = prompt("введите факультет: ");
+            document.write("аудитории для выбранного факультета:".bold() + "<br>");
+            if(answer === "математика"){
+                for(let i = 0; i < audience.length / 2; i++){
+                    document.write(audience[i] + "<br>");
+                }
+            }
+            if(answer === "филология"){
+                for(let i = 1; i < audience.length; i++){
+                    document.write(audience[i] + "<br>");
+                }
+            }
+            document.write("<br>");
+        }
+
+// 3.Вывод на экран только тех аудиторий, которые подходят для
+// переданной группы. Объект-группа состоит из названия,
+// количества студентов и названия факультета.
+        function ask_group(){
+            let students;
+            students = parseInt(prompt("введите количество студентов: "));
+            document.write("подходящие аудитории: <br>".bold())
+            if(students > 0 && students <= 10){
+                for(let i = 0; i < audience.length / 2; i++){
+                    document.write(audience[i] + "<br>");
+                }
+            }
+            if(students > 10 && students <= 15){
+                for(let i = 1; i < audience.length; i++){
+                    document.write(audience[i] + "<br>");
+                }
+            }
+            else if(students > 15){
+                document.write("слишком много студентов, у нас нет такой большой аудитории");
+            }
+            document.write("<br>");
+        }
+
+        // 4.Функция сортировки аудитории по количеству мест
+
+        function numUp(a1, a2)
+        {
+            // сортировка по возрастанию
+            return a1 - a2;
+        }
+
+        function sortBySeats(){
+            document.write("аудитории, отсортированные по количеству мест: <br>".bold());
+            audience.sort(numUp);
+           document.write(audience.join("<br>"));
+        }
+
+// 5.Функция сортировки аудиторий по названию(по алфавиту)
+function sortByName(){
+    let sortArray = [...audience];
+    for (let i = 0; i < sortArray.length - 1; i++) {
+        for (let j = 0; j < sortArray.length - 1 - i; j++) {
+            let nameA = sortArray[j][0];
+            let nameB = sortArray[j + 1][0];
+            if (nameA > nameB) {
+                let temp = sortArray[j];
+                sortArray[j] = sortArray[j + 1];
+                sortArray[j + 1] = temp;
+            }
+        }
+    }
+    document.write("аудитории, отсортированные по названию: <br>".bold());
+    for (let i = 0; i < sortArray.length; i++) {
+        document.write(sortArray[i] + "<br>");
+    }
+}
+
+        show();
+        show_choice();
+        ask_group();
+        sortBySeats();
+        sortByName();
+    </script>
+</body>
+</html>
