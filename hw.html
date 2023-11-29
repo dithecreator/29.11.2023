@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+// 1. Реализовать простейший вариант теста, поочередно
+// выдавая
+// пользователю вопросы, требующие односложных ответов ("Да" и "Нет").
+// После прохождения теста вывести результат. Вопросы и оценки за
+// каждый вопрос хранить
+// B сценарии в виде массивов.
+let answers = ["Вы человек?", "Вы славянин?", "Вы политик?", "Вы бизнесмен?", "Вы балбес?"];
+let coins = [];
+let usersAnswers = [];
+let result = 0;
+function test(){
+  for(let i = 0; i < answers.length; i++){
+   usersAnswers[i] = prompt(answers[i]);
+  }
+  
+  for(let i = 0; i < answers.length; i++){
+    if(usersAnswers[i] === "да"){
+        coins[i] = 20;
+    }
+    else{
+        coins[i] = 10;
+    }
+  } 
+  for(let i = 0; i < coins.length; i++){
+    result += coins[i];
+  }
+
+document.write("ваш результат: " + result);
+   
+}
+
+
+// 2. От пользователя требуется ввести ФИО. Необходимо, чтобы сценарий
+// проверил ввод пользователя на наличие недопустимых символов.
+// Недопустимыми символами считать любые символы, кроме букв,
+// пробелов и точек. Эти символы можно задать в сценарии в виде строки.
+
+let parameters = ["Введите имя: ", "Введите фамилию: ", "Введите отчество: "];
+let info = [];
+let allowedSymbols = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZйцукенгшщзхъфывапролджэёячсмитьбюЙЦУКЕНГШЩЗХЪФЫВАПРОЛДЖЭЁЯЧСМИТЬБЮ .';
+function check(){
+    for(let i = 0; i < parameters.length; i++){
+        info[i] = prompt(parameters[i]);
+    }
+
+
+
+ for (let i = 0; i < info.length; i++) {
+        let newInfo = info[i].split('');
+
+        for (let j = 0; j < newInfo.length; j++) {
+            if (allowedSymbols.indexOf(newInfo[j]) === -1) {
+                document.write("Вы ввели запрещенный символ");
+                return;
+            }
+        }
+    }
+
+}
+
+
+//3.Разделить на составные части введённый http-адрес
+//Например, адрес "http://www.ufa.com.ua/utilites/hdd/out.php?sort=2"
+//делится на следующие составляющие:
+//протокол http:
+//хост www.ufa.com.ua
+//путь /utilites/hdd/
+//имя файла out.php
+//строка запроса sort=2
+function site(){
+let answer = prompt("введите url адрес: ", "http://www.ufa.com.ua/utilites/hdd/out.php?sort=2");
+let newanswer = [...answer];
+let protocol;
+let host = [];
+let path = [];
+let name = [];
+let askString = [];
+let index;
+let j = 0;
+let i = 7;
+let counter = 0;
+let k = 0;
+
+
+
+
+protocol = answer.slice(0, 5);
+
+while(newanswer[i] !== '/' && i < newanswer.length) {
+    host[j] = newanswer[i];
+    j++;
+    i++;
+}
+
+
+
+
+
+for(let i = 0; i < newanswer.length; i++){
+    if(newanswer[i] === '/'){
+        counter++;
+    }
+    if(counter == 3){
+        index = i;
+      break;
+    }
+ 
+}
+
+
+for(let i = index; i < newanswer.length; i++){
+    path[k] = newanswer[i];
+    k++;
+    if(newanswer[i] === '/'){
+        counter++;
+    }
+    if(counter == 6){
+        index = i;
+      break;
+    }
+}
+
+
+let index1 = newanswer.indexOf('?');
+for (let i = index + 1; i < index1; i++) {
+    name[k] = newanswer[i];
+    k++;
+}
+
+for(let i = index1 + 1; i < newanswer.length; i++){
+    askString[k] = newanswer[i];
+    k++;
+}
+
+
+document.write("Протокол: " + protocol + "<br>");
+document.write("Хост: " + host.join("") + "<br>");
+document.write("Путь: " + path.join("") + "<br>");
+document.write("Имя файла: " + name.join("") + "<br>");
+document.write("Строка запроса: " + askString.join("") + "<br>");
+}
+
+//test();
+//check();
+site()
+
+    </script>
+</body>
+</html>
